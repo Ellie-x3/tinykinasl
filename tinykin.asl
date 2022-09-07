@@ -1,6 +1,6 @@
 //created by Toothie & just-ero
 
-tate("Tinykin")
+state("Tinykin")
 {
 	double UnscaledTime : "UnityPlayer.dll", 0x19EEC78, 0x70;
 }
