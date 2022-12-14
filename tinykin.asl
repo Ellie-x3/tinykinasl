@@ -55,7 +55,7 @@ update
 
 start
 {
-    return (current.TotalPlayTime + current.UnscaledTime - current.LastSaveT ime) < 1;
+    return (current.TotalPlayTime + current.UnscaledTime - current.LastSaveTime) < 1;
 }
 
 split
