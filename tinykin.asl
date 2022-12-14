@@ -34,6 +34,7 @@ init
 
         var bootstrap = mono.GetClass("Game", "Bootstrap");
         vars.Helper["IsLoadingLevel"] = bootstrap.Make<bool>("IsLoadingLevel");
+		vars.Helper["loading"] = bootstrap.Make<bool>("LoadingSceneFromBootstrap");
 
 		return true;
 	});
@@ -41,7 +42,7 @@ init
 	vars.Helper.Load();
 }
 
-update
+update 
 {
 	if (!vars.Helper.Update())
 		return false;
@@ -49,13 +50,12 @@ update
 	current.TotalPlayTime = vars.Helper["TotalPlayTime"].Current;
 	current.LastSaveTime = vars.Helper["LastSaveTime"].Current;
     current.IsLoadingLevel = vars.Helper["IsLoadingLevel"].Current;
-
-	// current.Scene = vars.Helper.Scenes.Active.Index;
+	current.loading = vars.Helper["loading"].Current;
 }
 
 start
 {
-    return (current.TotalPlayTime + current.UnscaledTime - current.LastSaveTime) < 1;
+    return (current.TotalPlayTime + current.UnscaledTime - current.LastSaveT ime) < 1;
 }
 
 split
@@ -66,14 +66,15 @@ reset
 
 gameTime
 {
-    if(!current.IsLoadingLevel){
-        return TimeSpan.FromSeconds(current.TotalPlayTime + current.UnscaledTime - current.LastSaveTime);
-    }	
+	//old
+    //if(!current.IsLoadingLevel){
+        //return TimeSpan.FromSeconds(current.TotalPlayTime + current.UnscaledTime - current.LastSaveTime);
+    //}	
 }
 
 isLoading
 {
-	return true;
+	return current.loading;
 }
 
 exit
@@ -85,4 +86,3 @@ shutdown
 {
 	vars.Helper.Dispose();
 }
-
